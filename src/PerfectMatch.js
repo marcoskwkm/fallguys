@@ -92,8 +92,10 @@ const PerfectMatch = () => {
     return () => document.removeEventListener('keydown', handler)
   }, [selected])
 
-  const handleReset = () =>
+  const handleReset = () => {
     setValues([...new Array(16)].map(() => Values.UNKNOWN))
+    setSelected(null)
+  }
 
   return (
     <div className="flex flex-column items-center mt4">
