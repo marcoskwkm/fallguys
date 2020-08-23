@@ -20,8 +20,7 @@ const Tile = ({ value, active, onClick }) => {
     border: '1px',
   }
   const inactiveStyles = {
-    backgroundColor: 'white',
-    borderStyle: 'none',
+    visibility: 'hidden',
   }
 
   return (
@@ -69,7 +68,7 @@ const Tiptoe = () => {
   return (
     <div className="flex flex-column items-center mt4">
       <img src={tileImage} alt="tiles" />
-      <p style={{ fontSize: '36px' }}>Possible tiles:</p>
+      <p className="f3">Possible tiles:</p>
       <div className="flex">
         {initialTiles.map((tile) => (
           <Tile

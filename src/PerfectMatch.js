@@ -17,10 +17,11 @@ const Tile = ({ value, selected, onClick }) => {
   const styles = {
     height: '120px',
     width: '120px',
-    borderRadius: '4px',
+    borderRadius: '8px',
     borderColor: selected ? '#ffd700' : 'black',
     borderStyle: 'solid',
     margin: '2px',
+    overflow: 'hidden',
   }
 
   const srcs = {
