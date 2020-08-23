@@ -63,35 +63,52 @@ const PerfectMatch = () => {
     [...new Array(16)].map(() => Values.UNKNOWN)
   )
 
-  useEffect(() => {
-    const handler = (event) => {
-      if (selected === null) {
-        return
+  useEffect(function preloadImages() {
+    ;[
+      appleImage,
+      bananaImage,
+      cherryImage,
+      grapeImage,
+      orangeImage,
+      watermelonImage,
+    ].forEach((img) => {
+      const image = new Image()
+      image.src = img
+    })
+  }, [])
+
+  useEffect(
+    function setKeyDownEventHandler() {
+      const handler = (event) => {
+        if (selected === null) {
+          return
+        }
+
+        const keys = {
+          a: Values.APPLE,
+          b: Values.BANANA,
+          c: Values.CHERRY,
+          g: Values.GRAPE,
+          m: Values.WATERMELON,
+          o: Values.ORANGE,
+          w: Values.WATERMELON,
+        }
+
+        const fruit = keys[event.key]
+        if (!fruit) {
+          return
+        }
+
+        setValues((arr) =>
+          arr.map((val, idx) => (idx === selected ? fruit : val))
+        )
       }
 
-      const keys = {
-        a: Values.APPLE,
-        b: Values.BANANA,
-        c: Values.CHERRY,
-        g: Values.GRAPE,
-        m: Values.WATERMELON,
-        o: Values.ORANGE,
-        w: Values.WATERMELON,
-      }
-
-      const fruit = keys[event.key]
-      if (!fruit) {
-        return
-      }
-
-      setValues((arr) =>
-        arr.map((val, idx) => (idx === selected ? fruit : val))
-      )
-    }
-
-    document.addEventListener('keydown', handler)
-    return () => document.removeEventListener('keydown', handler)
-  }, [selected])
+      document.addEventListener('keydown', handler)
+      return () => document.removeEventListener('keydown', handler)
+    },
+    [selected]
+  )
 
   const handleReset = () => {
     setValues([...new Array(16)].map(() => Values.UNKNOWN))
