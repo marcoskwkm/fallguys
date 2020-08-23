@@ -4,7 +4,7 @@ import { Fruit } from './constants'
 import appleImage from './media/pm-apple.png'
 import bananaImage from './media/pm-banana.png'
 import cherryImage from './media/pm-cherry.png'
-import grapeImage from './media/pm-watermelon.png'
+import grapeImage from './media/pm-grape.png'
 import orangeImage from './media/pm-orange.png'
 import watermelonImage from './media/pm-watermelon.png'
 
