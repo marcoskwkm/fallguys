@@ -13,6 +13,15 @@ const Values = {
   ...Fruit,
 }
 
+const srcs = {
+  [Fruit.APPLE]: appleImage,
+  [Fruit.BANANA]: bananaImage,
+  [Fruit.CHERRY]: cherryImage,
+  [Fruit.GRAPE]: grapeImage,
+  [Fruit.ORANGE]: orangeImage,
+  [Fruit.WATERMELON]: watermelonImage,
+}
+
 const Tile = ({ value, selected, onClick }) => {
   const styles = {
     height: '120px',
@@ -24,18 +33,9 @@ const Tile = ({ value, selected, onClick }) => {
     overflow: 'hidden',
   }
 
-  const srcs = {
-    [Fruit.APPLE]: appleImage,
-    [Fruit.BANANA]: bananaImage,
-    [Fruit.CHERRY]: cherryImage,
-    [Fruit.GRAPE]: grapeImage,
-    [Fruit.ORANGE]: orangeImage,
-    [Fruit.WATERMELON]: watermelonImage,
-  }
-
   return (
     <div style={styles} onClick={onClick}>
-      {value === Values.UNKNOWN ? (
+      {value === Values.UNKNOWN && (
         <div
           style={{
             height: '100%',
@@ -43,16 +43,16 @@ const Tile = ({ value, selected, onClick }) => {
             backgroundColor: '#6475CD',
           }}
         />
-      ) : (
-        <img
-          src={srcs[value]}
-          alt="tile"
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
-        />
       )}
+      {Object.keys(srcs).map((fruit) => (
+        <img
+          src={srcs[fruit]}
+          alt="tile"
+          height="100%"
+          width="100%"
+          hidden={fruit !== value}
+        />
+      ))}
     </div>
   )
 }
@@ -62,20 +62,6 @@ const PerfectMatch = () => {
   const [values, setValues] = useState(
     [...new Array(16)].map(() => Values.UNKNOWN)
   )
-
-  useEffect(function preloadImages() {
-    ;[
-      appleImage,
-      bananaImage,
-      cherryImage,
-      grapeImage,
-      orangeImage,
-      watermelonImage,
-    ].forEach((img) => {
-      const image = new Image()
-      image.src = img
-    })
-  }, [])
 
   useEffect(
     function setKeyDownEventHandler() {
