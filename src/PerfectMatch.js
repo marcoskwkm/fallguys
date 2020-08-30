@@ -77,6 +77,7 @@ const PerfectMatch = () => {
           g: Values.GRAPE,
           m: Values.WATERMELON,
           o: Values.ORANGE,
+          r: Values.ORANGE,
           w: Values.WATERMELON,
         }
 
